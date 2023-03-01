@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/test/UrlShortener.Domain.Tests/obj
+/test/UrlShortener.Domain.Tests/bin/Debug/net6.0
+/src/UrlShortener.WebApplication/obj
+/src/UrlShortener.WebApplication/bin/Debug/net6.0
+/src/UrlShortener.Domain/obj
+/src/UrlShortener.Domain/bin/Debug/net6.0
+/src/UrlShortener.Data/obj
+/src/UrlShortener.Data/bin/Debug/net6.0
