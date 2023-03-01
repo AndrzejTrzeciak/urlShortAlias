@@ -1,0 +1,33 @@
+﻿@model UrlShortener.Data.DomainModel.AddressAliasPair
+
+@{
+    ViewData["Title"] = "AddAlias";
+}
+
+<h1>AddAlias</h1>
+
+<h4>AddressAliasPair</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddAlias">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OriginalURL" class="control-label"></label>
+                <input asp-for="OriginalURL" class="form-control" name="longUrl" />
+                <span asp-validation-for="OriginalURL" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowAliasList">Go to alias list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

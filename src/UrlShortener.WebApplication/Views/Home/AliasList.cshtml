@@ -1,0 +1,41 @@
+﻿@model IEnumerable<UrlShortener.Data.DomainModel.AddressAliasPair>
+
+@{
+    ViewData["Title"] = "AliasList";
+}
+
+<h1>AliasList</h1>
+
+<p>
+    <a asp-action="ShowAddAlias">Add new</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortURL)
+            </td>
+ @*           <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>
