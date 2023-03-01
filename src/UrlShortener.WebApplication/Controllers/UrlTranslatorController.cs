@@ -12,7 +12,8 @@ namespace UrlShortener.WebApplication.Controllers
         {
             this.addressService = addressService;
         }
-        [Route("S/{shortUrl}")]
+        
+        [Route("/{shortUrl}")]
         public IActionResult GetLongUrl(string shortUrl)
         {
             var realAddress = addressService.GetLongUrl(shortUrl);
