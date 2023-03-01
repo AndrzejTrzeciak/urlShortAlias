@@ -1,0 +1,8 @@
+Todo:
+1. configure logging
+2. unit tests
+2. introduce configuration manager to provide default values in case the config file doesn't have the entry
+3. add mail notifications after creating an alias
+4. configure alias length depending on the price
+5. improve validation
+6. more informative error page
