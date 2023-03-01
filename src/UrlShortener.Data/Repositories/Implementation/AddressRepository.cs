@@ -20,6 +20,7 @@ namespace UrlShortener.Data.Repositories.Implementation
         private IRandomStringGenerator randomStringGenerator;
         private readonly IConfiguration configuration;
         private readonly ILogger<AddressRepository> logger;
+        private object mylocker = new object();
 
         public AddressRepository(IMemoryCache cache,
             IPersistedDataRepository persistedData,
@@ -39,17 +40,25 @@ namespace UrlShortener.Data.Repositories.Implementation
 
         public string? GetLongAddressVersion(string shortAddress)
         {
-            if(cache.TryGetValue(shortAddress, out string longAddress))
+            if(cache.TryGetValue(shortAddress, out ICacheEntry longAddressEntry))
             {
-                return longAddress;
+                return longAddressEntry.Value as string;
             }
             else
             {
                 var persistedLongUrl = persistedData.GetLongUrl(shortAddress);
                 if(persistedLongUrl != null)
                 {
-                    var entry = cache.CreateEntry(shortAddress);
-                    entry.Value = persistedLongUrl;
+                    lock (mylocker)
+                    {
+                        if (!cache.TryGetValue(shortAddress, out string longAddress_))
+                        {
+                            //value hasn't beed added in the mean time, so we can now safely put it into cache
+                            ICacheEntry entry = cache.CreateEntry(shortAddress);
+                            entry.Value = persistedLongUrl;
+                            cache.Set(shortAddress, entry);
+                        }
+                    }
                     return persistedLongUrl;
                 }
                 logger.LogInformation($"real URL for requested alias not found. requested alias: {shortAddress}");
